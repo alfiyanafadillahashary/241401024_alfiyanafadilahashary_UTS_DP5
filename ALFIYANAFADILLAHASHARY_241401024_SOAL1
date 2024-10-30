@@ -1,74 +1,50 @@
-program KasirSupermarketAHY;
-
+program kasirsederhana;
 uses crt;
-
 var
-  nama: string;
-  hari: string;
-  totalHarga, diskon, diskonMember, totalBayar: real;
-  poin, jumlahProdukPasta, jumlahProdukSabun, jumlahProdukEsKrim: integer;
-
+    nama, hari, produk, kategori : string;
+    jumlah, harga, totalharga, diskon, diskonmember, totaldiskon: integer;
+    bayar : real;
+    poin : integer;
+    member : char;
 begin
-  clrscr;
-  writeln('   Supermarket AHY   ');
-  write('Nama Anggota: ');
-  readln(nama);
-  
-  write('Hari (senin, selasa, rabu, kamis): ');
-  readln(hari);
-  
-  totalHarga := 0;
-  poin := 0;
-
-  
-  write('Jumlah produk pasta gigi (Rp16.000): ');
-  readln(jumlahProdukPasta);
-  totalHarga := totalHarga + (jumlahProdukPasta * 16000);
-  
-  write('Jumlah produk sabun (Rp7.000): ');
-  readln(jumlahProdukSabun);
-  totalHarga := totalHarga + (jumlahProdukSabun * 7000);
-  
-  write('Jumlah produk es krim (Rp200.000, max 10): ');
-  readln(jumlahProdukEsKrim);
-  if jumlahProdukEsKrim > 10 then
-    jumlahProdukEsKrim := 10; 
-  totalHarga := totalHarga + (jumlahProdukEsKrim * 20000);
-  
-  
-  case hari of
-    'senin': diskon := totalHarga * 0.10; 
-    'selasa': diskon := totalHarga * 0.05; 
-    'rabu': diskon := totalHarga * 0.30; 
-    'kamis': diskon := totalHarga * 0.08; 
-  else
-    diskon := 0;
-  end;
-
-  totalHarga := totalHarga - diskon; 
-  
-  
-  diskonMember := totalHarga * 0.10;
-  totalHarga := totalHarga - diskonMember;
-
-  
-  if (jumlahProdukPasta + jumlahProdukSabun + jumlahProdukEsKrim >= 10) then
-    totalHarga := totalHarga - (totalHarga * 0.05); 
-
-  
-  poin := trunc(totalHarga / 50000);
-  
-  
-  writeln('   Struk Pembayaran       ');
-  writeln('Nama Anggota: ', nama);
-  writeln('Total Harga Sebelum Diskon: Rp', totalHarga + diskon + diskonMember:0:2);
-  writeln('Diskon Hari: Rp', diskon:0:2);
-  writeln('Diskon Member: Rp', diskonMember:0:2);
-  writeln('Total Setelah Diskon: Rp', totalHarga:0:2);
-  writeln('Poin yang didapat: ', poin);
-  
-  if poin >= 50 then
-    writeln('Selamat! Anda dapat menukarkan 50 poin untuk voucher diskon 20%.');
-
-  readln;
+clrscr;
+    write('sebutkan nama anda: ');
+    readln(nama);
+    write ('sebutkan nama hari ini: ');
+    readln(hari);
+    write('sebutkan nama produk: ');
+    readln(produk);
+    write('sebutkan kategori: ');
+    readln(kategori);
+    write('sebutkan harga produk: ');
+    readln(harga);
+    write('sebutkan jumlah produk: ');
+    readln(jumlah);
+    write('apakah anda member? ' );
+    readln(member);
+        totalharga := jumlah * harga ;
+    if (hari = 'senin') and (kategori = 'hygiene') then
+        diskon := 10
+    else if (hari = 'selasa') and (kategori = 'frozen food') then
+        diskon := 5
+    else if (hari = 'rabu') and (kategori = 'laktosa') then
+        diskon := 8
+    else if (hari = 'kamis') and (kategori = 'elektronik') then
+        diskon := 30
+    else
+        diskon := 0;
+    if (Member = 'y') then
+        totaldiskon := diskon + 10  
+    else
+        totaldiskon := diskon ;
+    bayar := totalharga - (totalharga * totaldiskon/100);
+    poin := trunc(bayar) div 50000;
+    
+    writeln('===================================');
+    writeln('harga total: ', totalharga);
+    writeln('diskon yang anda dapat: ', totaldiskon,'%' );
+    writeln('pembayaran: ', bayar:3:0 );
+    writeln('poin: ', poin);
+    
+    readln;
 end.
